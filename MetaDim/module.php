@@ -87,11 +87,31 @@
 		$allDevices = $this->GetDevices();
 
 		foreach ($allDevices as $currentDevice) {
+
+			// Now we need to determin which type of intensity we have (max 100 or max 255)
+			$currentDeviceDetails = IPS_GetVariable($currentDevice);
+			$currentDeviceProfile = $currentDeviceDetails['VariableProfile'];
+
+			if ($currentDeviceProfile == "~Intensity.100") {
+			
+				$currentDeviceIntensity = GetValue($currentDevice);
+			}
+			else {
+			
+				if ($currentDeviceProfile == "~Intensity.255") {
+				
+					$currentDeviceIntensity = round(GetValue($currentDevice) / 2.55, 0);
+				}
+				else {
+				
+					IPS_LogMessage($_IPS['SELF'],"METADIM - Get Intensity not possible for device $currentDevice - Variable profile was not found");
+				}
+			}
 		
 			// If one device is on we set the status to on
-			if (GetValue($currentDevice) > $maxIntensity ) {
+			if ($currentDeviceIntensity > $maxIntensity ) {
 			
-				$maxIntensity = GetValue($currentDevice);	
+				$maxIntensity = $currentDeviceIntensity;	
 			}
 		}
 
