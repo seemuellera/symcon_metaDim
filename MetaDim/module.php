@@ -147,14 +147,14 @@
 
 	public function IncreaseIntensity() {
 	
-		$newIntensity = GetValue($this->GetIDForIdent("Intensity") ) + ReadPropertyInteger("DimStep");
+		$newIntensity = GetValue($this->GetIDForIdent("Intensity") ) + $this->ReadPropertyInteger("DimStep");
 		if ($newIntensity > 100) { $newIntensity = 100; }
 		$this->SetIntensity($newIntensity);
 	}
 
 	public function DecreaseIntensity() {
 	
-		$newIntensity = GetValue($this->GetIDForIdent("Intensity") ) - ReadPropertyInteger("DimStep");
+		$newIntensity = GetValue($this->GetIDForIdent("Intensity") ) - $this->ReadPropertyInteger("DimStep");
 		if ($newIntensity < 0) { $newIntensity = 0; }
 		$this->SetIntensity($newIntensity);
 	}
