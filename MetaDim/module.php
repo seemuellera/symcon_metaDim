@@ -70,7 +70,7 @@
 
 		// Add the buttons for the test center
 		$form['actions'][] = Array("type" => "Button", "label" => "Refresh Overall Status", "onClick" => 'METADIM_RefreshInformation($id);');
-		$form['actions'][] = Array("type" => "HorizontalSlider", "name" => "TestIntensity", "minimum" => 0, "maximum" => 100, "onChange" => 'METADIM_SetIntensity($id,$TestIntentsity);');
+		$form['actions'][] = Array("type" => "HorizontalSlider", "name" => "TestIntensity", "minimum" => 0, "maximum" => 100, "onChange" => 'METADIM_SetIntensity($id,$TestIntensity);');
 		$form['actions'][] = Array("type" => "Button", "label" => "Increase Intensity", "onClick" => 'METADIM_IncreaseIntensity($id);');
 		$form['actions'][] = Array("type" => "Button", "label" => "Decrease Intensity", "onClick" => 'METADIM_DecreaseIntensity($id);');
 
