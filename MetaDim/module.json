@@ -1,0 +1,14 @@
+{
+  "id": "{879D4DB6-A879-4CEA-8795-F7FE62BC60C9}",
+  "name": "MetaDim",
+  "type": 3,
+  "vendor": "Andreas",
+  "aliases": 
+  [
+	  "MetaDim"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "METADIM"
+}
