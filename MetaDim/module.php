@@ -91,14 +91,15 @@
 			// Now we need to determin which type of intensity we have (max 100 or max 255)
 			$currentDeviceDetails = IPS_GetVariable($currentDevice);
 			$currentDeviceProfile = $currentDeviceDetails['VariableProfile'];
+			$currentDeviceCustomProfile = $currentDeviceDetails['VariableCustomProfile'];
 
-			if ($currentDeviceProfile == "~Intensity.100") {
+			if ( ($currentDeviceProfile == "~Intensity.100") || ($currentDeviceCustomProfile == "~Intensity.100") ) {
 			
 				$currentDeviceIntensity = GetValue($currentDevice);
 			}
 			else {
 			
-				if ($currentDeviceProfile == "~Intensity.255") {
+				if ( ($currentDeviceProfile == "~Intensity.255") || ($currentDeviceCustomProfile == "~Intensity.255") ) {
 				
 					$currentDeviceIntensity = round(GetValue($currentDevice) / 2.55, 0);
 				}
