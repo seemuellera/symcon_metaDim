@@ -151,7 +151,15 @@
 
 			if (preg_match('/HUELight/', $parentModuleName) ) {
 
-				HUE_SetBrightness($parentId, $newIntensity255);
+				// HUE devices dont turn off when intensity reaches 0
+				if ($newIntensity255 > 0) {
+
+					HUE_SetBrightness($parentId, $newIntensity255);
+				}
+				else {
+				
+					HUE_SetState($parentId, false);
+				}
 				continue;
 			}
 
