@@ -99,7 +99,7 @@
 			}
 			else {
 			
-				if ( ($currentDeviceProfile == "~Intensity.255") || ($currentDeviceCustomProfile == "~Intensity.255") || ($currentDeviceProfile == "Intensity.HUE") || ($currentDeviceCustomProfile == "Intensity.HUE") ) {
+				if ( ($currentDeviceProfile == "~Intensity.255") || ($currentDeviceCustomProfile == "~Intensity.255") || ($currentDeviceProfile == "Intensity.Hue") || ($currentDeviceCustomProfile == "Intensity.Hue") ) {
 				
 					$currentDeviceIntensity = round(GetValue($currentDevice) / 2.55, 0);
 				}
