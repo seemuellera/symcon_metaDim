@@ -126,6 +126,13 @@
 
 		foreach ($allDevices as $currentDevice) {
 			
+			// Check if the target device is a HUE device
+			$variableDetails = IPS_GetVariable($currentDevice);
+			if ( ($variableDetails['VariableProfile'] == "Intensity.Hue") || ($variableDetails['VariableProfile'] == "~Intensity.255") ) {
+				
+				$newIntensity = round($newIntensity * 2.55;
+			}
+			
 			$result = RequestAction($currentDevice, $newIntensity);
 			
 			if (! $result) {
