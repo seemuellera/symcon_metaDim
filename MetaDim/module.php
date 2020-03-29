@@ -122,54 +122,16 @@
 
 	public function SetIntensity($newIntensity) {
 
-		// Some Devices Dim at 0 to 255 instead of 0 to 100. Therefore we calculate another intensity
-		$newIntensity255 = round($newIntensity * 2.55, 0);
-
 		$allDevices = $this->GetDevices();
 
 		foreach ($allDevices as $currentDevice) {
-		
-			$currentDeviceDetails = IPS_GetVariable($currentDevice);
-			$parentId = $currentDeviceDetails['VariableAction'];
+			
+			$result = RequestAction($currentDevice, $newIntensity);
+			
+			if (! $result) {
 
-			if (! IPS_InstanceExists($parentId) ) {
-				                        
-		        	IPS_LogMessage($_IPS['SELF'],"METADIM - Set Intensity not possible for device $currentDevice - parent instance was not found");
-				// Now we skip this device
-				continue;
+				IPS_LogMessage($_IPS['SELF'],"METADIM - Set Intensity not possible for device $currentDevice - could not identify instance type");
 			}
-
-			// Now we need to find out which device type we have to deal with
-			$parentDetails = IPS_GetInstance($parentId);
-			$parentModuleName = $parentDetails['ModuleInfo']['ModuleName'];
-
-			if (preg_match('/Z-Wave/', $parentModuleName) ) {
-
-				ZW_DimSet($parentId, $newIntensity);
-				continue;
-			}
-
-			if (preg_match('/HUELight/', $parentModuleName) ) {
-
-				// HUE devices dont turn off when intensity reaches 0
-				if ($newIntensity255 > 0) {
-
-					HUE_SetBrightness($parentId, $newIntensity255);
-				}
-				else {
-				
-					HUE_SetState($parentId, false);
-				}
-				continue;
-			}
-
-			if (preg_match('/MetaDim/', $parentModuleName) ) {
-
-				METADIM_SetIntensity($parentId, $newIntensity);
-				continue;
-			}
-
-			IPS_LogMessage($_IPS['SELF'],"METADIM - Set Intensity not possible for device $currentDevice - could not identify instance type");
 
 		}
 	}
