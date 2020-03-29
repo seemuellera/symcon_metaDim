@@ -130,10 +130,12 @@
 			$variableDetails = IPS_GetVariable($currentDevice);
 			if ( ($variableDetails['VariableProfile'] == "Intensity.Hue") || ($variableDetails['VariableProfile'] == "~Intensity.255") ) {
 				
-				$newIntensity = round(floatval($newIntensity) * 2.55);
+				$result = RequestAction($currentDevice, round($newIntensity * 2.55));
 			}
+			else {
 			
-			$result = RequestAction($currentDevice, $newIntensity);
+				$result = RequestAction($currentDevice, $newIntensity);
+			}
 			
 			if (! $result) {
 
